@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>SummaryTask4</display-name>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Controller</servlet-name>
+    <servlet-class>ua.nure.serikov.SummaryTask4.web.Controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Controller</servlet-name>
+    <url-pattern>/controller</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>ua.nure.serikov.SummaryTask4.web.filter.EncodingST4Filter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/WEB-INF/jsp/*</url-pattern>
+    <servlet-name>Controller</servlet-name>
+  </filter-mapping>
+  <filter>
+    <filter-name>CommandAccessFilter</filter-name>
+    <filter-class>
+            ua.nure.serikov.SummaryTask4.web.filter.CommandAccessST4Filter
+        </filter-class>
+    <init-param>
+      <param-name>admin</param-name>
+      <param-value>
+                listTrucks truckAdd registrationUser listUsers deleteTruck deleteUser editTruck editUser
+                tripCreate listRequests approveRequest deleteRequest changeTripStatus findUser deleteTrip
+            </param-value>
+    </init-param>
+    <init-param>
+      <param-name>dispatcher</param-name>
+      <param-value>
+                tripCreate listRequests approveRequest deleteRequest changeTripStatus listTrucks
+            </param-value>
+    </init-param>
+    <init-param>
+      <param-name>driver</param-name>
+      <param-value>
+                requestCreate driverPersonal tripCompleted deleteRequest
+            </param-value>
+    </init-param>
+    <init-param>
+      <param-name>common</param-name>
+      <param-value>
+                logout noCommand viewSettings changeLocale listTrips sortTrips pageOk
+            </param-value>
+    </init-param>
+    <init-param>
+      <param-name>out-of-control</param-name>
+      <param-value>login pageError</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CommandAccessFilter</filter-name>
+    <servlet-name>Controller</servlet-name>
+  </filter-mapping>
+  <listener>
+    <listener-class>ua.nure.serikov.SummaryTask4.web.listener.ContextListener</listener-class>
+  </listener>
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/WEB-INF/jsp/error_page.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/jsp/error_page.jsp</location>
+  </error-page>
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>resources</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+    <param-value>ru</param-value>
+  </context-param>
+  <context-param>
+    <param-name>locales</param-name>
+    <param-value>/Resources/locales.properties</param-value>
+  </context-param>
+</web-app>
